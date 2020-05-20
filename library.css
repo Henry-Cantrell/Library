@@ -1,0 +1,12 @@
+.input {
+    display: block;
+}
+#displayDiv {
+    display: block;
+}
+#deleteButton:before {
+    content: 'Remove this entry'
+}
+#readButton:before {
+    content: 'Finished reading'
+}

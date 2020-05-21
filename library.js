@@ -11,7 +11,9 @@ function BookEntry(title, author, pageCount, genre) {
 function NewBook(arg) {
 
     arg.preventDefault();
+    
     counter++
+    readCounter = 0
 
     let bookAdd = new BookEntry((document.getElementById("title").value), (document.getElementById("author").value), (document.getElementById("pageCount").value), (document.getElementById("genre").value));
     libraryStorage.push(bookAdd);
@@ -35,9 +37,6 @@ function NewBook(arg) {
         let trashVar = libraryStorage[deleteButton.id];
         let deleteThisOne = libraryStorage.indexOf(trashVar);
         libraryStorage.splice(deleteThisOne, 1)
-       
-        let desiredDeletes = document.getElementsByClassName(counter)
-        console.log(desiredDeletes)
 
         if (this.className == tableDiv.className && this.className == readButton.className) {
             tableDiv.remove()
@@ -51,11 +50,21 @@ function NewBook(arg) {
     readButton.className = counter
 
     readButton.addEventListener('click', function(){
-        //relate readButton to array object and add 'read' status to its prototype
-    })
+       
+       readCounter++
+
+       if (readCounter == 1) {bookAdd.readToggle = 'Read'
+
+       let readStatus ="<table border='1|1'>";
+       readStatus+="<td>"+"Read status: Finished reading" + "</td>";
+       readStatus += "</table>";
+       
+       tableDiv.innerHTML += readStatus
+    }})
 
     let tableDiv = document.createElement('div')
     tableDiv.className =  counter
+    tableDiv.id = 'divTag' 
     tableDiv.innerHTML += html;
 
     let libraryUpdater= document.getElementById("libraryEntries");
